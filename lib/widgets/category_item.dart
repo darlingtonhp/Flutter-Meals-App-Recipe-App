@@ -1,17 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:meals_app/views/constant/routes.gr.dart';
+import 'package:meals_app/views/constants/routes.gr.dart';
 
 class CategoryItem extends StatelessWidget {
   final String id;
   final String title;
   final Color color;
-  const CategoryItem(
-      {Key? key, required this.title, required this.color, required this.id})
-      : super(key: key);
+  const CategoryItem({
+    Key? key,
+    required this.title,
+    required this.color,
+    required this.id,
+  }) : super(key: key);
   void selectCategory(BuildContext context) {
-    context.router
-        .push(CategoryMealsRoute(categoryId: id, categoryTitle: title));
+    context.router.push(CategoryMealsRoute(
+      categoryId: id,
+      categoryTitle: title,
+    ));
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
-import 'package:meals_app/views/constant/routes.gr.dart';
+import 'package:meals_app/views/constants/routes.gr.dart';
 
 class MealItem extends StatelessWidget {
   final String id;
