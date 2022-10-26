@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 
-class FiltersPage extends StatefulWidget {
+import '../app/cubit/filter_cubit.dart';
+
+class FiltersPage extends StatelessWidget {
   const FiltersPage({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<FiltersPage> createState() => _FiltersPageState();
-}
-
-class _FiltersPageState extends State<FiltersPage> {
-  bool _glutenFree = false;
-  bool _lactoseFree = false;
-  bool _vegan = false;
-  bool _vegetarian = false;
-
   Widget _buildSwitchListTile(
+    BuildContext context,
     String title,
     String subtitle,
     bool currentValue,
@@ -35,120 +29,114 @@ class _FiltersPageState extends State<FiltersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: const Text('Your filters'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () {
-              // final selectedFilters = {
-              //   'gluten': _glutenFree,
-              //   'lactose': _lactoseFree,
-              //   'vegan': _vegan,
-              //   'vegetarian': _vegetarian,
-              // };
-            },
-          ),
-        ],
-      ),
-      drawer: const MainDrawer(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
+    return BlocBuilder<FilterCubit, FilterState>(
+      builder: (context, state) {
+        if (state is FilterInitial) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is FilterLoaded) {
+          return Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              centerTitle: true,
+              title: const Text('Your filters'),
             ),
-            padding: const EdgeInsets.all(20),
-            child: Text(
-              'Adjust your meal selection',
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Divider(
-            thickness: 20,
-          ),
-          Expanded(
-            child: ListView(
+            drawer: const MainDrawer(),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildSwitchListTile(
-                  'Gluten-free',
-                  'Only include gluten-free meals',
-                  _glutenFree,
-                  (value) {
-                    setState(
-                      () {
-                        _glutenFree = value;
-                      },
-                    );
-                  },
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    'Adjust your meal selection',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
                 const Divider(
                   thickness: 20,
                 ),
-                _buildSwitchListTile(
-                  'Lactose-free',
-                  'Only include lactose-free meals',
-                  _lactoseFree,
-                  (value) {
-                    setState(
-                      () {
-                        _lactoseFree = value;
-                      },
-                    );
-                  },
-                ),
-                const Divider(
-                  thickness: 20,
-                ),
-                _buildSwitchListTile(
-                  'Vegan',
-                  'Only include vegan meals',
-                  _vegan,
-                  (value) {
-                    setState(
-                      () {
-                        _vegan = value;
-                      },
-                    );
-                  },
-                ),
-                const Divider(
-                  thickness: 20,
-                ),
-                _buildSwitchListTile(
-                  'Vegetarian',
-                  'Only include vegetarian meals',
-                  _vegetarian,
-                  (value) {
-                    setState(
-                      () {
-                        _vegetarian = value;
-                      },
-                    );
-                  },
-                ),
-                const Divider(
-                  thickness: 20,
-                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      _buildSwitchListTile(
+                        context,
+                        'Gluten-free',
+                        'Only include gluten-free meals',
+                        state.filters['gluten'] ?? false,
+                        (value) {
+                          state.filters['gluten'] = value;
+                          context.read<FilterCubit>().setFilters(state.filters);
+                        },
+                      ),
+                      const Divider(
+                        thickness: 20,
+                      ),
+                      _buildSwitchListTile(
+                        context,
+                        'Lactose-free',
+                        'Only include lactose-free meals',
+                        state.filters['lactose'] ?? false,
+                        (value) {
+                          state.filters['lactose'] = value;
+                          context.read<FilterCubit>().setFilters(state.filters);
+                        },
+                      ),
+                      const Divider(
+                        thickness: 20,
+                      ),
+                      _buildSwitchListTile(
+                        context,
+                        'Vegetarian',
+                        'Only include vegetarian meals',
+                        state.filters['vegetarian'] ?? false,
+                        (value) {
+                          state.filters['vegetarian'] = value;
+                          context.read<FilterCubit>().setFilters(state.filters);
+                        },
+                      ),
+                      const Divider(
+                        thickness: 20,
+                      ),
+                      _buildSwitchListTile(
+                        context,
+                        'Vegan',
+                        'Only include vegan meals',
+                        state.filters['vegan'] ?? false,
+                        (value) {
+                          state.filters['vegan'] = value;
+                          context.read<FilterCubit>().setFilters(state.filters);
+                        },
+                      ),
+                      const Divider(
+                        thickness: 20,
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-          )
-        ],
-      ),
+          );
+        } else {
+          return const Center(
+            child: Text('Something bad happened'),
+          );
+        }
+      },
     );
   }
 }
