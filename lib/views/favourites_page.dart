@@ -21,15 +21,15 @@ class FavouritesPage extends StatelessWidget {
       return ListView.builder(
         itemBuilder: (context, index) {
           return MealItem(
-            id: state.favouritesMeals[index].id,
-            title: state.favouritesMeals[index].title,
-            imageUrl: state.favouritesMeals[index].imageUrl,
-            duration: state.favouritesMeals[index].duration,
-            affordability: state.favouritesMeals[index].affordability,
-            complexity: state.favouritesMeals[index].complexity,
+            id: state.favouritedMeals[index].id,
+            title: state.favouritedMeals[index].title,
+            imageUrl: state.favouritedMeals[index].imageUrl,
+            duration: state.favouritedMeals[index].duration,
+            affordability: state.favouritedMeals[index].affordability,
+            complexity: state.favouritedMeals[index].complexity,
           );
         },
-        itemCount: state.favouritesMeals.length,
+        itemCount: state.favouritedMeals.length,
       );
     } else {
       return const Center(

@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import '../../models/dummy_data.dart';
 import '../../models/meal.dart';
 
-part 'filter_state.dart';
+part 'meal_state.dart';
 
-class FilterCubit extends Cubit<FilterState> {
+class MealCubit extends Cubit<MealState> {
   Map<String, bool> defaultFilters = {
     'gluten': false,
     'lactose': false,
@@ -16,7 +16,7 @@ class FilterCubit extends Cubit<FilterState> {
 
   late Map<String, bool> filters;
 
-  FilterCubit() : super(const FilterInitial()) {
+  MealCubit() : super(const MealInitial()) {
     // Load SavedFilters
     filters = defaultFilters;
     // Filter dummyData with Filters;
@@ -51,6 +51,6 @@ class FilterCubit extends Cubit<FilterState> {
       },
     ).toList();
 
-    emit(FilterLoaded(filteredMeals: meals, filters: filters));
+    emit(MealLoaded(meals: meals, filteredMeals: filters));
   }
 }

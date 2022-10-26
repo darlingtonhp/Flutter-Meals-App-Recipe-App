@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meals_app/views/constants/routes.gr.dart';
 import 'package:meals_app/views/cubit/favourites_cubit.dart';
 
-import 'app/cubit/filter_cubit.dart';
+import 'app/cubit/meal_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => FilterCubit()),
+        BlocProvider(create: (context) => MealCubit()),
         BlocProvider(create: (context) => FavouritesCubit()),
       ],
       child: MaterialApp.router(

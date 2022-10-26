@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 
-import '../app/cubit/filter_cubit.dart';
+import '../app/cubit/meal_cubit.dart';
 
 class FiltersPage extends StatelessWidget {
   const FiltersPage({
@@ -29,14 +29,14 @@ class FiltersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterCubit, FilterState>(
+    return BlocBuilder<MealCubit, MealState>(
       builder: (context, state) {
-        if (state is FilterInitial) {
+        if (state is MealInitial) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (state is FilterLoaded) {
+        if (state is MealLoaded) {
           return Scaffold(
             appBar: AppBar(
               elevation: 0,
@@ -77,10 +77,12 @@ class FiltersPage extends StatelessWidget {
                         context,
                         'Gluten-free',
                         'Only include gluten-free meals',
-                        state.filters['gluten'] ?? false,
+                        state.filteredMeals['gluten'] ?? false,
                         (value) {
-                          state.filters['gluten'] = value;
-                          context.read<FilterCubit>().setFilters(state.filters);
+                          state.filteredMeals['gluten'] = value;
+                          context
+                              .read<MealCubit>()
+                              .setFilters(state.filteredMeals);
                         },
                       ),
                       const Divider(
@@ -90,10 +92,12 @@ class FiltersPage extends StatelessWidget {
                         context,
                         'Lactose-free',
                         'Only include lactose-free meals',
-                        state.filters['lactose'] ?? false,
+                        state.filteredMeals['lactose'] ?? false,
                         (value) {
-                          state.filters['lactose'] = value;
-                          context.read<FilterCubit>().setFilters(state.filters);
+                          state.filteredMeals['lactose'] = value;
+                          context
+                              .read<MealCubit>()
+                              .setFilters(state.filteredMeals);
                         },
                       ),
                       const Divider(
@@ -103,10 +107,12 @@ class FiltersPage extends StatelessWidget {
                         context,
                         'Vegetarian',
                         'Only include vegetarian meals',
-                        state.filters['vegetarian'] ?? false,
+                        state.filteredMeals['vegetarian'] ?? false,
                         (value) {
-                          state.filters['vegetarian'] = value;
-                          context.read<FilterCubit>().setFilters(state.filters);
+                          state.filteredMeals['vegetarian'] = value;
+                          context
+                              .read<MealCubit>()
+                              .setFilters(state.filteredMeals);
                         },
                       ),
                       const Divider(
@@ -116,10 +122,12 @@ class FiltersPage extends StatelessWidget {
                         context,
                         'Vegan',
                         'Only include vegan meals',
-                        state.filters['vegan'] ?? false,
+                        state.filteredMeals['vegan'] ?? false,
                         (value) {
-                          state.filters['vegan'] = value;
-                          context.read<FilterCubit>().setFilters(state.filters);
+                          state.filteredMeals['vegan'] = value;
+                          context
+                              .read<MealCubit>()
+                              .setFilters(state.filteredMeals);
                         },
                       ),
                       const Divider(

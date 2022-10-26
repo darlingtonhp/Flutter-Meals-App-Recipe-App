@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meals_app/app/cubit/filter_cubit.dart';
+import 'package:meals_app/app/cubit/meal_cubit.dart';
 import 'package:meals_app/views/cubit/favourites_cubit.dart';
 
 class MealDetailsPage extends StatelessWidget {
@@ -34,14 +34,14 @@ class MealDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterCubit, FilterState>(
+    return BlocBuilder<MealCubit, MealState>(
       builder: (context, state) {
-        if (state is FilterInitial) {
+        if (state is MealInitial) {
           return const CircularProgressIndicator();
         }
-        if (state is FilterLoaded) {
+        if (state is MealLoaded) {
           final selectedMeal =
-              state.filteredMeals.firstWhere((meal) => meal.id == mealsId);
+              state.meals.firstWhere((meal) => meal.id == mealsId);
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -135,11 +135,23 @@ class MealDetailsPage extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: const Color(0XFFE59985),
+              elevation: 12,
               onPressed: () {
                 BlocProvider.of<FavouritesCubit>(context)
                     .toggleFavourite(mealsId);
               },
-              child: const Icon(Icons.favorite_outline),
+              child: BlocBuilder<FavouritesCubit, FavouritesState>(
+                builder: (context, state) {
+                  return Icon(
+                    BlocProvider.of<FavouritesCubit>(context)
+                            .markAsFavourite(mealsId)
+                        ? Icons.star
+                        : Icons.star_border,
+                    color: const Color(0XFF200E62),
+                    size: 50,
+                  );
+                },
+              ),
             ),
           );
         } else {

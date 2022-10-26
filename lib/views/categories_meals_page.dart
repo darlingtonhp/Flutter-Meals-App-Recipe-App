@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../app/cubit/filter_cubit.dart';
+import '../app/cubit/meal_cubit.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryMealsPage extends StatelessWidget {
@@ -15,15 +15,15 @@ class CategoryMealsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterCubit, FilterState>(
+    return BlocBuilder<MealCubit, MealState>(
       builder: (context, state) {
-        if (state is FilterInitial) {
+        if (state is MealInitial) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (state is FilterLoaded) {
-          final categoryMeals = state.filteredMeals.where(
+        if (state is MealLoaded) {
+          final categoryMeals = state.meals.where(
             (meal) {
               return meal.categories.contains(categoryId);
             },

@@ -10,7 +10,7 @@ class FavouritesInitial extends FavouritesState {
 }
 
 class FavouritesLoaded extends FavouritesState {
-  final List<Meal> favouritesMeals;
+  final List<Meal> favouritedMeals;
 
-  const FavouritesLoaded({required this.favouritesMeals});
+  const FavouritesLoaded({required this.favouritedMeals});
 }

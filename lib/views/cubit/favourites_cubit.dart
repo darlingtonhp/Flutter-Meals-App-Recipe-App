@@ -15,10 +15,22 @@ class FavouritesCubit extends Cubit<FavouritesState> {
     if (existingIndex == -1) {
       favouriteMeals.add(
           DummyData().mealsData.firstWhere((meal) => meal.id == newMealId));
-      emit(FavouritesLoaded(favouritesMeals: favouriteMeals));
+      emit(
+        FavouritesLoaded(
+          favouritedMeals: favouriteMeals,
+        ),
+      );
     } else {
       favouriteMeals.removeAt(existingIndex);
-      emit(FavouritesLoaded(favouritesMeals: favouriteMeals));
+      emit(
+        FavouritesLoaded(
+          favouritedMeals: favouriteMeals,
+        ),
+      );
     }
+  }
+
+  bool markAsFavourite(String id) {
+    return favouriteMeals.any((meal) => meal.id == id);
   }
 }
