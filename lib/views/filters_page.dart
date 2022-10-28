@@ -9,13 +9,13 @@ class FiltersPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Widget _buildSwitchListTile(
-    BuildContext context,
-    String title,
-    String subtitle,
-    bool currentValue,
-    Function(bool value) onChanged,
-  ) {
+  Widget _buildSwitchListTile({
+    required BuildContext context,
+    required String title,
+    required String subtitle,
+    required bool currentValue,
+    required Function(bool value) onChanged,
+  }) {
     return SwitchListTile(
       title: Text(
         title,
@@ -74,60 +74,60 @@ class FiltersPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       _buildSwitchListTile(
-                        context,
-                        'Gluten-free',
-                        'Only include gluten-free meals',
-                        state.filteredMeals['gluten'] ?? false,
-                        (value) {
-                          state.filteredMeals['gluten'] = value;
+                        context: context,
+                        title: 'Gluten-free',
+                        subtitle: 'Only include gluten-free meals',
+                        currentValue: state.filterData['gluten'] ?? false,
+                        onChanged: (value) {
+                          state.filterData['gluten'] = value;
                           context
                               .read<MealCubit>()
-                              .setFilters(state.filteredMeals);
+                              .setFilters(state.filterData);
                         },
                       ),
                       const Divider(
                         thickness: 20,
                       ),
                       _buildSwitchListTile(
-                        context,
-                        'Lactose-free',
-                        'Only include lactose-free meals',
-                        state.filteredMeals['lactose'] ?? false,
-                        (value) {
-                          state.filteredMeals['lactose'] = value;
+                        context: context,
+                        title: 'Lactose-free',
+                        subtitle: 'Only include lactose-free meals',
+                        currentValue: state.filterData['lactose'] ?? false,
+                        onChanged: (value) {
+                          state.filterData['lactose'] = value;
                           context
                               .read<MealCubit>()
-                              .setFilters(state.filteredMeals);
+                              .setFilters(state.filterData);
                         },
                       ),
                       const Divider(
                         thickness: 20,
                       ),
                       _buildSwitchListTile(
-                        context,
-                        'Vegetarian',
-                        'Only include vegetarian meals',
-                        state.filteredMeals['vegetarian'] ?? false,
-                        (value) {
-                          state.filteredMeals['vegetarian'] = value;
+                        context: context,
+                        title: 'Vegetarian',
+                        subtitle: 'Only include vegetarian meals',
+                        currentValue: state.filterData['vegetarian'] ?? false,
+                        onChanged: (value) {
+                          state.filterData['vegetarian'] = value;
                           context
                               .read<MealCubit>()
-                              .setFilters(state.filteredMeals);
+                              .setFilters(state.filterData);
                         },
                       ),
                       const Divider(
                         thickness: 20,
                       ),
                       _buildSwitchListTile(
-                        context,
-                        'Vegan',
-                        'Only include vegan meals',
-                        state.filteredMeals['vegan'] ?? false,
-                        (value) {
-                          state.filteredMeals['vegan'] = value;
+                        context: context,
+                        title: 'Vegan',
+                        subtitle: 'Only include vegan meals',
+                        currentValue: state.filterData['vegan'] ?? false,
+                        onChanged: (value) {
+                          state.filterData['vegan'] = value;
                           context
                               .read<MealCubit>()
-                              .setFilters(state.filteredMeals);
+                              .setFilters(state.filterData);
                         },
                       ),
                       const Divider(

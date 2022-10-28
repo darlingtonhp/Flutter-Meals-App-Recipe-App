@@ -6,6 +6,7 @@ import 'package:meals_app/views/cubit/favourites_cubit.dart';
 import 'app/cubit/meal_cubit.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

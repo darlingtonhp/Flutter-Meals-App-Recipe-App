@@ -11,7 +11,7 @@ class MealInitial extends MealState {
 
 class MealLoaded extends MealState {
   final List<Meal> meals;
-  final Map<String, bool> filteredMeals;
+  final Map<String, bool> filterData;
 
-  const MealLoaded({required this.filteredMeals, required this.meals});
+  const MealLoaded({required this.filterData, required this.meals});
 }

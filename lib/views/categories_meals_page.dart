@@ -23,11 +23,11 @@ class CategoryMealsPage extends StatelessWidget {
           );
         }
         if (state is MealLoaded) {
-          final categoryMeals = state.meals.where(
-            (meal) {
-              return meal.categories.contains(categoryId);
-            },
-          ).toList();
+          final categoryMeals = state.meals
+              .where(
+                (meal) => meal.categories.contains(categoryId),
+              )
+              .toList();
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,

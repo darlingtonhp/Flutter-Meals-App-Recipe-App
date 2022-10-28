@@ -39,7 +39,7 @@ dependencies:
   auto_route: ^5.0.2
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
-  shared_preferences: ^0.5.5
+  shared_preferences: ^2.0.15
   
 
 dev_dependencies:
