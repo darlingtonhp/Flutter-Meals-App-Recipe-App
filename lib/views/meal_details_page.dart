@@ -142,11 +142,12 @@ class MealDetailsPage extends StatelessWidget {
               },
               child: BlocBuilder<FavouritesCubit, FavouritesState>(
                 builder: (context, state) {
+                  var favorited = state is FavouritesLoaded &&
+                      state.favouritedMeals.any(
+                        (meal) => meal.id == mealsId,
+                      );
                   return Icon(
-                    BlocProvider.of<FavouritesCubit>(context)
-                            .markAsFavourite(mealsId)
-                        ? Icons.star
-                        : Icons.star_border,
+                    favorited ? Icons.star : Icons.star_border,
                     color: const Color(0XFF200E62),
                     size: 50,
                   );
