@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,16 +40,20 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
   Future<void> saveFavourites(List<Meal> favouritedList) async {
     favourites = favouritedList;
-    await _prefs?.setString(favouriteDataPref, mealExtToJson(favouritedList));
+    List<String> favouritesJsonList =
+        favouritedList.map((meal) => jsonEncode(meal.toJson())).toList();
+    await _prefs?.setStringList(favouriteDataPref, favouritesJsonList);
   }
 
   loadSavedFavourites(SharedPreferences prefs) async {
-    String? favouritedList = prefs.getString(favouriteDataPref);
+    List<String>? favouritedList = prefs.getStringList(favouriteDataPref);
     try {
       if (favouritedList != null) {
-        List<Meal> savedFavs = mealExtFromJson(favouritedList);
+        List<Meal> savedFavs = favouritedList
+            .map((mealJson) => Meal.fromJson(jsonDecode(mealJson)))
+            .toList();
         favourites = savedFavs;
-        return;
+        emit(FavouritesLoaded(favouritedMeals: favourites));
       }
     } catch (e) {
       print(e);

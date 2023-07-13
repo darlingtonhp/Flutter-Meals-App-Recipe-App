@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meals_app/views/constants/routes.gr.dart';
-import 'package:meals_app/views/cubit/favourites_cubit.dart';
+import 'package:meals_app/views/favourites/cubit/favourites_cubit.dart';
 
 import 'app/cubit/meal_cubit.dart';
 

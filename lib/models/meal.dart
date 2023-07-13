@@ -1,12 +1,5 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 part 'meal.g.dart';
-
-List<Meal> mealExtFromJson(String str) =>
-    List<Meal>.from(jsonDecode(str).map((x) => Meal.fromJson(x)));
-String mealExtToJson(List<Meal> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 enum Complexity {
   @JsonValue(203)

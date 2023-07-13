@@ -16,7 +16,7 @@ import 'package:flutter/material.dart' as _i8;
 
 import '../categories_meals_page.dart' as _i2;
 import '../categories_page.dart' as _i5;
-import '../favourites_page.dart' as _i6;
+import '../favourites/view/favourites_page.dart' as _i6;
 import '../filters_page.dart' as _i4;
 import '../meal_details_page.dart' as _i3;
 import '../tab_bar_page.dart' as _i1;

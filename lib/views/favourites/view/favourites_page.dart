@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meals_app/views/cubit/favourites_cubit.dart';
+import 'package:meals_app/views/favourites/cubit/favourites_cubit.dart';
 
-import '../widgets/meal_item.dart';
+import '../../../widgets/meal_item.dart';
 
 class FavouritesPage extends StatelessWidget {
   const FavouritesPage({Key? key}) : super(key: key);

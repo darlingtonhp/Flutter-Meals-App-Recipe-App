@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:meals_app/views/categories_page.dart';
-import 'package:meals_app/views/favourites_page.dart';
+import 'package:meals_app/views/favourites/view/favourites_page.dart';
 import 'package:meals_app/views/filters_page.dart';
 import 'package:meals_app/views/meal_details_page.dart';
 import '../categories_meals_page.dart';

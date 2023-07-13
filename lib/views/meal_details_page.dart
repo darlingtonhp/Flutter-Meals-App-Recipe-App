@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meals_app/app/cubit/meal_cubit.dart';
-import 'package:meals_app/views/cubit/favourites_cubit.dart';
+import 'package:meals_app/views/favourites/cubit/favourites_cubit.dart';
 
 class MealDetailsPage extends StatelessWidget {
   final String mealsId;
